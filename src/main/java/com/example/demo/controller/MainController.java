@@ -3,11 +3,13 @@ package com.example.demo.controller;
 
 
 
-import com.example.demo.dto.customerdto.CusListResponceDto;
-import com.example.demo.dto.customerdto.CustomerResponceDto;
 import com.example.demo.dto.customerdto.CustomerReqDto;
 import com.example.demo.dto.customerdto.CustomerReqEditDto;
+import com.example.demo.dto.customerdto.CustomerResponceDto;
 import com.example.demo.dto.customerdto.CustomerResponceEditDto;
+import com.example.demo.dto.customerdto.CusListResponceDto;
+import com.example.demo.dto.customerdto.CustomerListDto;
+import com.example.demo.dto.customerdto.CustomerListResponse;
 import com.example.demo.services.CustomerService;
 import com.example.demo.util.AppResponse;
 import org.springframework.data.domain.Sort;
@@ -86,6 +88,24 @@ public class MainController {
                     .success(false)
                     .message("no content based on your search")
                     .build();
+    }
+    @GetMapping("/delete")
+
+    public AppResponse<CustomerListResponse> deleteCustomer(
+            @RequestParam(value = "id to delete", required = false) final Long id) {
+
+
+        CustomerListDto customerListDto = customerService.deleteCustomer(id);
+        if (customerListDto != null) {
+            return AppResponse.<CustomerListResponse>builder()
+                    .success(true)
+                    .message("deleted")
+                    .build();
+        }
+        return AppResponse.<CustomerListResponse>builder()
+                .success(false)
+                .message("not deleted")
+                .build();
     }
 /*
     @PostMapping("/login")

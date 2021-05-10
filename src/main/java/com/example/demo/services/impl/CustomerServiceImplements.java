@@ -221,6 +221,22 @@ public class CustomerServiceImplements implements CustomerService, UserDetailsSe
         }
         return null;
     }
+    @Override
+    public CustomerListDto deleteCustomer(final Long id) {
+
+        CustomerListDto customerListDto = new CustomerListDto();
+        Optional<Customer> customer = customerOptionalRepository.findById(id);
+        if (customer.isPresent()) {
+            customer.get().setIsdeleted(true);
+            customerOptionalRepository.save(customer.get());
+            customerListDto.setId(id);
+
+
+        }
+        return customerListDto;
+
+
+    }
 
 
     private CustomerListDto processingCustomerListDTO(final Customer customerX) {
