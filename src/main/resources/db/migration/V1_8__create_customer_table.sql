@@ -1,0 +1,1 @@
+alter  TABLE `customer` CHANGE `role` `role` ENUM('ADMIN', 'USER', 'MEDIATOR');

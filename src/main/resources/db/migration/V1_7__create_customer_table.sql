@@ -1,0 +1,1 @@
+alter  TABLE `customer` ADD `role` ENUM('ADMIN', 'USER');

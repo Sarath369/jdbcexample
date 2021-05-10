@@ -1,0 +1,1 @@
+alter  TABLE `company` CHANGE `company_name` `company_name` VARCHAR(100) NOT NULL;

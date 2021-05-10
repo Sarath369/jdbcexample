@@ -1,0 +1,1 @@
+alter  TABLE `customer` CHANGE `date` `date` DATETIME NOT NULL;
