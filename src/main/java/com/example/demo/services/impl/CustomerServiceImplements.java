@@ -57,6 +57,7 @@ public class CustomerServiceImplements implements CustomerService, UserDetailsSe
         customer.setRole(customerReqDto.getRole());
         customer.setHaspassword(customerReqDto.getHaspassword());
         customer.setPassword(passwordEncoder.encode(customerReqDto.getPassword()));
+        customer.setIsdeleted(false);
 
         Customer reCustomer = customerRepository.save(customer);
         CustomerResponceDto customerResponceDto = new CustomerResponceDto();
@@ -133,43 +134,6 @@ public class CustomerServiceImplements implements CustomerService, UserDetailsSe
         return null;
     }
 
-/*
-    @Override
-    public CustomerResponceDto customerLogin(final CustomerLoginReqDto customerLoginReqDto) {
-        CustomerResponceDto customerResponceDto = new CustomerResponceDto();
-        //**Optional<Customer> customer = customerOptionalRepository.findById(customerLoginReqDto.getId());
-
-        Optional<Customer> customer = customerOptionalRepository.findByEmail(customerLoginReqDto.getEmail());
-        //if (name != null){customers = customerRepository.findByEmail(providedPassword ,pageRequest1);}
-
-        String providedPassword = customerLoginReqDto.getPassword();
-        String securePassword = null;
-        if (customer.isPresent()) {
-            securePassword = customer.get().getPassword();
-//          securePassword = passwordUtil.generateSecurePassword(customer.get().getPassword(), salt);
-//          customerLoginReqDto.setPassword(securePassword);
-        }
-
-
-
-
-        String newSecurePassword = passwordUtil.generateSecurePassword(providedPassword, salt);
-
-        if (newSecurePassword.equalsIgnoreCase(securePassword)) {
-            customerResponceDto.setId(customer.get().getId());
-            customerResponceDto.setName(customer.get().getName());
-            customerResponceDto.setEmail(customer.get().getEmail());
-            customerResponceDto.setDate(customer.get().getDate());
-            customerResponceDto.setPassword(customer.get().getPassword());
-            customerResponceDto.setRole(customer.get().getRole());
-            customerResponceDto.setIsdeleted(customer.get().getIsdeleted());
-            return customerResponceDto;
-        } else {
-           throw new GenericException("User not found");
-        }
-    }
-    */
-
     @Override
     public UserDetails loadUserByUsername(final String username)
             throws UsernameNotFoundException {
@@ -199,7 +163,7 @@ public class CustomerServiceImplements implements CustomerService, UserDetailsSe
         Page<Customer> user;
         List<CustomerListDto> usersList = new ArrayList<>();
         CustomerListResponse userListResponse = new CustomerListResponse();
-        PageRequest pageRequest = PageRequest.of(page, size, sort, "salesPerson");
+        PageRequest pageRequest = PageRequest.of(page, size, sort, "name");
         if (id != null) {
             user = customerOptionalRepository.findById(id, pageRequest);
         } else {
@@ -237,8 +201,6 @@ public class CustomerServiceImplements implements CustomerService, UserDetailsSe
 
 
     }
-
-
     private CustomerListDto processingCustomerListDTO(final Customer customerX) {
         CustomerListDto customerListDto = new CustomerListDto();
         if (customerX != null) {

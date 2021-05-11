@@ -18,6 +18,11 @@ public class CustomerDetailController {
         this.customerDetailService = customerDetailServiceHQ;
     }
 
+    /**
+     * add_details.
+     * @param cusDetailReqDto cusDetailReqDto
+     * @return CusDetailResponceDto
+     */
     @PostMapping("/add_details")
     public AppResponse<CusDetailResponceDto> addCustomerDetails(@RequestBody final CusDetailReqDto cusDetailReqDto) {
         CusDetailResponceDto cusDetailResponceDto = customerDetailService.addCustomerDetails(cusDetailReqDto);
@@ -34,7 +39,13 @@ public class CustomerDetailController {
                 .message("no content based on your search")
                 .build();
     }
-@PostMapping("/update_details")
+
+    /**
+     * update_details.
+     * @param cusDetailEditReqDto cusDetailEditReqDto
+     * @return CusDetailResponceDto
+     */
+    @PostMapping("/update_details")
     public AppResponse<CusDetailResponceDto> updateCustomerDetails(@RequestBody final CusDetailEditReqDto cusDetailEditReqDto) {
         CusDetailResponceDto cusDetailResponceDto = customerDetailService.updateCustomerDetails(cusDetailEditReqDto);
     if (cusDetailResponceDto != null) {

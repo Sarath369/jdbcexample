@@ -64,29 +64,13 @@ public class AuthenticationController {
                 .message("Authentication error, please check provided email or password!")
                 .build();
     }
-    @PostMapping(value = "/forgotPassword")
-    public AppResponse<StatusDTO> forgotPassword(@RequestParam("email") final String email) {
-        StatusDTO response = authenticationService.forgotPassword(email);
-        if (response != null) {
-            return AppResponse.<StatusDTO>builder()
-                    .data(response)
-                    .message("Password sent successfully")
-                    .success(true)
-                    .build();
-        }
-        return AppResponse.<StatusDTO>builder()
-                .success(false)
-                .message("Issue with resetting password, please try again later!")
-                .build();
-    }
-/*
+
     /**
-     * The forgotPassword service.
+     * ForgotPassword.
      *
      * @param email email
-     * @return email
+     * @return Responce
      */
-/*
     @PostMapping(value = "/forgotPassword")
     public AppResponse<StatusDTO> forgotPassword(@RequestParam("email") final String email) {
         StatusDTO response = authenticationService.forgotPassword(email);
@@ -102,5 +86,4 @@ public class AuthenticationController {
                 .message("Issue with resetting password, please try again later!")
                 .build();
     }
-*/
 }

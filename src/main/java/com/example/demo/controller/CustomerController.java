@@ -20,14 +20,22 @@ public class CustomerController {
         this.userService = userServices;
     }
 
+    /**
+     * List of all users.
+     * @param page page
+     * @param size size
+     * @param sort sort
+     * @param id id
+     * @return CustomerListResponse
+     */
     @GetMapping("/usersList")
     public AppResponse<CustomerListResponse> getPaginatedUsersList(
             @RequestParam(value = "page", required = false, defaultValue = "0") final int page,
             @RequestParam(value = "size", required = false, defaultValue = "10") final int size,
             @RequestParam(value = "sort", required = false, defaultValue = "ASC") final Sort.Direction sort,
-            @RequestParam(value = "id", required = false) final Long userId) {
+            @RequestParam(value = "id", required = false) final Long id) {
 
-        CustomerListResponse userListResponse = userService.getPaginatedUsersList(page, size, sort, userId);
+        CustomerListResponse userListResponse = userService.getPaginatedUsersList(page, size, sort, id);
         if (userListResponse != null) {
             return AppResponse.<CustomerListResponse>builder()
                     .data(userListResponse)

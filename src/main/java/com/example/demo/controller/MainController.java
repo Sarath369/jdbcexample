@@ -31,6 +31,11 @@ public class MainController {
         this.customerService = customerServiceHQ;
     }
 
+    /**
+     * Create Customer.
+     * @param customerRequest customerRequest
+     * @return CustomerResponceDto
+     */
     @PostMapping("/create")
     public AppResponse<CustomerResponceDto> createCustomer(@RequestBody final CustomerReqDto customerRequest) {
 
@@ -50,6 +55,12 @@ public class MainController {
                 .build();
 
     }
+
+    /**
+     * Edit Customer.
+     * @param customerRequestEditDTO customerRequestEditDTO
+     * @return CustomerResponceEditDto
+     */
     @PostMapping("/edit")
     public AppResponse<CustomerResponceEditDto> editCustomer(@RequestBody final CustomerReqEditDto customerRequestEditDTO) {
 
@@ -69,6 +80,15 @@ public class MainController {
                 .build();
     }
 
+    /**
+     * List all customers.
+     * @param page page
+     * @param size size
+     * @param sort sort
+     * @param id id
+     * @param search search
+     * @return CusListResponceDto
+     */
     @GetMapping("/list")
     public AppResponse<CusListResponceDto> getPaginatedCustomerList(@RequestParam(value = "page", required = false, defaultValue = "0") final int page,
                                                        @RequestParam(value = "size", required = false, defaultValue = "10") final int size,
@@ -89,6 +109,12 @@ public class MainController {
                     .message("no content based on your search")
                     .build();
     }
+
+    /**
+     * Delete Customer.
+     * @param id id
+     * @return CustomerListResponse
+     */
     @GetMapping("/delete")
 
     public AppResponse<CustomerListResponse> deleteCustomer(
@@ -107,13 +133,4 @@ public class MainController {
                 .message("not deleted")
                 .build();
     }
-/*
-    @PostMapping("/login")
-    CustomerResponceDto customerLogin(@RequestBody final CustomerLoginReqDto customerLoginReqDto) {
-        CustomerResponceDto customerResponceDto = customerService.customerLogin(customerLoginReqDto);
-        return customerResponceDto;
-    }
- */
-
-
 }

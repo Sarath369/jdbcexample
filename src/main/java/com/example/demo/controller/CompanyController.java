@@ -24,6 +24,12 @@ public class CompanyController {
         this.companyService = companyServiceHQ;
     }
 
+    /**
+     * Add data to company table.
+     *
+     * @param companyReqDto companyReqDto
+     * @return CompanyResponceDto
+     */
     @PostMapping("/add_to_company")
     public AppResponse<CompanyResponceDto> addToCompany(@RequestBody final CompanyReqDto companyReqDto) {
 
@@ -44,6 +50,15 @@ public class CompanyController {
 
     }
 
+    /**
+     * company_list.
+     * @param page page
+     * @param size size
+     * @param sort sort
+     * @param id id
+     * @param search search
+     * @return CompListResponceDto
+     */
     @GetMapping("/company_list")
     public AppResponse<CompListResponceDto> getPaginatedCompanyList(@RequestParam(value = "page", required = false, defaultValue = "0") final int page,
                                                        @RequestParam(value = "size", required = false, defaultValue = "10") final int size,

@@ -11,6 +11,5 @@ public class CustomerReqDto {
     private LocalDateTime date;
     private String password;
     private Role role;
-    private Boolean isdeleted;
     private Boolean haspassword;
 }
